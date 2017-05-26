@@ -26,7 +26,7 @@ class TodoItem extends Component {
     render() {
         const style = { textAlign: "left" }
         style.backgroundColor = this.props.todo.done ? 'rgba(0,0,0,0.2)' : '';
-
+        style.textDecoration =  this.props.todo.done ?'line-through':''
         const iconButtonElement = (
             <IconButton
                 touch={true}
@@ -45,7 +45,9 @@ class TodoItem extends Component {
 
         return (
             this.state.mode === 'item' ?
-                <ListItem children={(<span key={this.props.todo.id}>{this.props.todo.text}</span>)} style={style} onDoubleClick={this.handleDoubleClick} onKeyPress={this.handleKeyPress} rightIconButton={rightIconMenu}
+                <ListItem children={(<div style={{
+                    wordWrap:'break-word'
+                }} key={this.props.todo.id}>{this.props.todo.text}</div>)} style={style} onDoubleClick={this.handleDoubleClick} onKeyPress={this.handleKeyPress} rightIconButton={rightIconMenu}
                 /> :
                 <ListItem >
                     <TextField
@@ -83,7 +85,7 @@ class TodoItem extends Component {
                     const todo = this.props.todo;
                     todo.text = this.state.value;
                     todoAction.update(todo);
-                } else{
+                } else {
                     this.setState({ value: this.props.todo.text })
                 }
 
